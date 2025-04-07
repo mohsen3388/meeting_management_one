@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtiLAB | Admin Dashboard Login </title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="login-style.css">
+    <link href='./boxicons/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+            {% csrf_token %}
+
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>AtiLAB Managment Dashboard </span></div>
+
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+            <div class="fieldWrapper">
+                {{ form.username.errors }}
+                <label for="{{ form.username.id_for_label }}">Username:</label>
+                {{ form.username }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.password.errors }}
+                <label for="{{ form.password.id_for_label }}">Password:</label>
+                {{ form.password }}
+            </div>
+            <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>

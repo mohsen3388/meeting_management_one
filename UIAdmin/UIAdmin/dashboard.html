@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title> AtiLAB | Customers Dashboard </title>
+    <link rel="stylesheet" href="/static/css/UIAdmin/UIAdmin/General-style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href='/static/css/UIAdmin/UIAdmin//boxicons/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxs-widget'></i>
+            <span class="logo_name">AtiLAB</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="./dashboard.html" class="active">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+              <a href="./graphs.html">
+                  <i class='bx bx-line-chart'></i>
+                  <span class="links_name">Setting</span>
+              </a>
+            </li>
+
+
+            <li>
+              <a href="./setting.html">
+                  <i class='bx bx-cog'></i>
+                  <span class="links_name">Setting</span>
+              </a>
+            </li>
+
+            <li class="log_out">
+                <a href="{% url 'logout' %}">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Dashboard</span>
+            </div>
+
+            <div class="profile-details">
+                <i class='bx bx-user'></i>
+                <span class="admin_name">{{ Activeusername }}</span>
+            </div>
+        </nav>
+
+        <div class="home-content">
+
+            <div class="overview-boxes">
+
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Client ID</div>
+                        <div class="number" id="headID">{{Activeusername}}</div>
+                        <div class="indicator">
+                            <i class='bx bx-grid-small'></i>
+                            <span class="text">Customer ID</span>
+                        </div>
+                    </div>
+
+                    <i class='bx bx-carousel cart'></i>
+                </div>
+
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Total Devices</div>
+                        <div class="number" id="tProduct">{{ consumer_count }}</div>
+                        <div class="indicator">
+                            <i class='bx bx-ruler'></i>
+                            <span class="text">Number of Devices</span>
+                        </div>
+                    </div>
+                    <i class='bx bxs-package cart two'></i>
+                </div>
+
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Online Devices</div>
+                        <div class="number" id="effi">{{ consumer_count }}</div>
+                        <div class="indicator">
+                            <i class='bx bx-up-arrow-alt'></i>
+                            <span class="text">Number of Devices</span>
+                        </div>
+                    </div>
+                    <i class='bx bx-tachometer cart three'></i>
+                </div>
+
+                <div class="box">
+                    <div class="right-side">
+                        <div class="box-topic">Alarms</div>
+                        <div class="number" id="shiftEffi">%TAlarms%</div>
+                        <div class="indicator">
+                            <i class='bx bx-ruler'></i>
+                            <span class="text">in last week</span>
+                        </div>
+                    </div>
+                    <i class='bx bxl-stack-overflow cart four'></i>
+                </div>
+
+
+
+            </div>
+
+            <div class="sales-boxes">
+
+                <div class="top-sales box">
+                    <div class="title">
+
+                    <div class="meetings" id="related_links">
+
+                    <ul>
+                            {% for device in devices %}
+                            <li>
+                                <a href="">{{ device.device_type }}</a>
+                            </li>
+                            {% endfor %}
+
+
+                    </ul>
+                      </ul>
+                    </div>
+                </div>
+                </div>
+
+
+            </div>
+            <div class="sales-boxes">
+
+
+                <div class="top-sales box">
+                    <div class="title">Alarms And Actions</div>
+
+
+                    <div class="meetings">
+                      <ul>
+                        {% for meeting in meetings %}
+                        <li>
+                          <a href="{% url 'detail' meeting.id %}">{{meeting.title}}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+    <script>
+        if (!!window.EventSource) {
+            var source = new EventSource('/eventDash');
+
+            source.addEventListener('open', function(e) {
+                console.log("Events Connected");
+            }, false);
+            source.addEventListener('error', function(e) {
+                if (e.target.readyState != EventSource.OPEN) {
+                    console.log("Events Disconnected");
+                }
+            }, false);
+
+            source.addEventListener('message', function(e) {
+                console.log("message", e.data);
+            }, false);
+
+            source.addEventListener('headID', function(e) {
+                console.log("headID", e.data);
+                document.getElementById("headID").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('tProduct', function(e) {
+                console.log("tProduct", e.data);
+                document.getElementById("tProduct").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('effi', function(e) {
+                console.log("effi", e.data);
+                document.getElementById("effi").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('shiftEffi', function(e) {
+                console.log("shiftEffi", e.data);
+                document.getElementById("shiftEffi").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('ver', function(e) {
+                console.log("ver", e.data);
+                document.getElementById("ver").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('temp', function(e) {
+                console.log("temp", e.data);
+                document.getElementById("temp").innerHTML = e.data + " °C";
+            }, false);
+
+            source.addEventListener('current', function(e) {
+                console.log("current", e.data);
+                document.getElementById("current").innerHTML = e.data + " A";
+            }, false);
+
+            source.addEventListener('volt', function(e) {
+                console.log("volt", e.data);
+                document.getElementById("volt").innerHTML = e.data + " V";
+            }, false);
+
+            source.addEventListener('errNum', function(e) {
+                console.log("errNum", e.data);
+                document.getElementById("errNum").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('sProduct', function(e) {
+                console.log("sProduct", e.data);
+                document.getElementById("sProduct").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('shiftNum', function(e) {
+                console.log("shiftNum", e.data);
+                document.getElementById("shiftNum").innerHTML = e.data;
+            }, false);
+
+            source.addEventListener('dookProduct', function(e) {
+                console.log("dookProduct", e.data);
+                document.getElementById("dookProduct").innerHTML = e.data;
+            }, false);
+
+        }
+    </script>
+
+</body>
+
+</html>

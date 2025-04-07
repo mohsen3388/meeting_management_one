@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title> PMO Meeting | Add New Meeting </title>
+    <link rel="stylesheet" href="/static/meetings/General-style.css">
+    <link rel="stylesheet" href="/static/meetings/para-style.css">
+    <link rel="icon" type="pmo/jpeg" href="/static/meetings/pmo.jpeg">
+    <link href='/static/meetings/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxs-widget'></i>
+            <span class="logo_name">PMO Meeting</span>
+        </div>
+        <ul class="nav-links">
+          <li>
+              <a href="http://127.0.0.1:8000/" class="active">
+                  <i class='bx bx-grid-alt'></i>
+                  <span class="links_name">Home</span>
+              </a>
+          </li>
+
+
+        </ul>
+    </div>
+
+    <section class="home-section">
+
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Add New Meeting</span>
+            </div>
+
+            <div class="profile-details">
+                <i class='bx bx-user'></i>
+                <span class="admin_name">{{ mis }}</span>
+            </div>
+        </nav>
+
+        <div class="home-content">
+
+            <div class="sales-boxes">
+
+              <div class="top-sales box">
+                    <ul class="top-sales-details">
+
+                      <form class="parameters" action="" method="POST">
+                        {% csrf_token %}
+
+
+                        <!-- Textboxes are Here -->
+                        
+                        <label for="title"> عنوان جلسه  </label>
+                        <input type="text" id="FistName" name="title" placeholder="عنوان جلسه" required>
+                        </br></br></br>
+
+                        <label for="date">تاریخ برگزاری </label>
+                        <input type="date" id="LastName" name="date" placeholder="تاریخ جلسه" required>
+                        </br></br></br>
+
+                        <label for="room">محل برگزاری </label>
+                        <input type="text" id="email" onchange="ChangeCarList()" name="room" placeholder="محل برگزاری جلسه" required>
+                        </br></br></br>
+                        <label for="starthour">ساعت شروع جلسه </label>
+                        <input type="time" id="password" name="starthour" placeholder="ساعت شروع جلسه" required>
+                        </br></br></br>
+
+                        <label for="endhour"> ساعت پایان جلسه </label>
+                        <input type="time" id="NationalID" name="endhour" placeholder=" ساعت پایان جلسه "  required>
+                        </br></br></br>
+
+                        <div class="switch_box box_1">     Online !?     
+                            <input type="checkbox" id="door" name="type" value="true" class="switch_1" checked>
+                        </div>
+                        </br></br></br>
+
+                        <button type="submit" value="Submit" onclick="submitMessage(okkkkkkkkk)"><i class='bx bx-save' ></i> Register</button>
+
+                      </form>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/website/home.css" />
+    <title>The Meeting Planner Application</title>
+  </head>
+  <body>
+    <div class="content">
+
+      <div class="welcome">
+        <div class="meetings">
+          <h2> جلسات فعال سازمان بنادر و دریانوردی</h2>
+          <ul>
+            {% for meeting in meetings %}
+            <li>
+              <a href="{% url 'detail' meeting.id %}">{{meeting.title}}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="links">
+          <a href="{% url 'form' %}">ثبت جلسه جدید</a>
+          <a href="{% url 'rooms_list' %}">لیست اتاق ها</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

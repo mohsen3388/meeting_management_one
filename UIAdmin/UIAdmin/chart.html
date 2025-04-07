@@ -1,0 +1,32 @@
+<div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('container', {
+      chart: {
+          type: 'line'
+      },
+      title: {
+          text: 'Device Temprature'
+      },
+      xAxis: {
+          categories: {{ categories|safe }}
+      },
+      series: [{
+          name: 'PB2',
+          data: {{ survived_series }},
+          color: 'green'
+      }, {
+          name: 'PB3',
+          data: {{ not_survived_series }},
+          color: 'red'
+      }, {
+          name: 'PB1',
+          data: {{ pb1 }},
+          color: 'blue'
+      }, {
+          name: 'PB4',
+          data: {{ pb4 }},
+          color: 'brown'
+      }]
+  });
+</script>

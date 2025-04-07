@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title> AtiLAB | New Customer </title>
+    <link rel="stylesheet" href="/static/css/UIAdmin/UIAdmin/General-style.css">
+    <link rel="stylesheet" href="/static/css/UIAdmin/UIAdmin/para-style.css">
+    <!-- Boxicons CDN Link -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href='/static/css/UIAdmin/UIAdmin//boxicons/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxs-widget'></i>
+            <span class="logo_name">AtiLAB</span>
+        </div>
+        <ul class="nav-links">
+          <li>
+              <a href="add_customer" class="active">
+                  <i class='bx bx-grid-alt'></i>
+                  <span class="links_name">Add New Customer</span>
+              </a>
+          </li>
+
+          <li>
+              <a href="find_customer" class="active">
+                  <i class='bx bx-search'></i>
+                  <span class="links_name">Find Customer</span>
+              </a>
+          </li>
+            <li class="log_out">
+                <a href="./logout.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">New Customer</span>
+            </div>
+
+            <div class="profile-details">
+                <i class='bx bx-user'></i>
+                <span class="admin_name">Administrator</span>
+                <!--i class='bx bx-chevron-down' ></i-->
+            </div>
+        </nav>
+
+        <div class="home-content">
+
+
+
+            <div class="sales-boxes">
+
+              <div class="top-sales box">
+                    <div class="title">Customer Info</div>
+                    <ul class="top-sales-details">
+
+                      <form class="parameters" >
+
+                        <!-- Textboxes are Here -->
+                        <label for="CustomerID">Customer ID: </label>
+                        <input type="number" id="CustomerID" name="CustomerID" placeholder={{ id }} >
+                        </br></br></br>
+
+                        <label for="FistName">Name: </label>
+                        <input type="text" id="FistName" name="FistName" placeholder={{ name }} >
+                        </br></br></br>
+
+                        <label for="LastName">Family: </label>
+                        <input type="text" id="LastName" name="LastName" placeholder={{ family }} >
+                        </br></br></br>
+
+                        <label for="NationalID">National ID: </label>
+                        <input type="number" id="NationalID" name="NationalID" placeholder={{ national_code }} >
+                        </br></br></br>
+
+                        <label for="phone1">Mobile Number: </label>
+                        <input type="tel" id="phone1" name="phone1" placeholder={{ phone_number }} >
+                        </br></br></br>
+
+                        <label for="Address">Address: </label>
+                        <input type="text" id="Address" name="Address" placeholder={{ address }}>
+                        </br></br></br>
+
+
+                      </form>
+
+                    </ul>
+                </div>
+
+
+              <div class="top-sales box">
+
+                    <ul class="top-sales-details">
+
+            <form method="POST" class="parameters">
+
+                <table>
+                    {{ form }}
+
+                </table>
+
+                {% csrf_token %}
+
+                    <button type="submit"> Create</button>
+            </form>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+            if (sidebar.classList.contains("active")) {
+                sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            } else
+                sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    </script>
+</body>
+</html>

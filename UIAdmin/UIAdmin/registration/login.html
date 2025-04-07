@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtiLAB | Admin Dashboard Login </title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="/static/css/UIAdmin/UIAdmin/login-style.css">
+    <link href='/static/css/UIAdmin/UIAdmin/boxicons/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>AtiLAB Managment Dashboard </span></div>
+
+
+        <form name="loginForm" action="" method="post">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+            <div class="row">
+
+            <i class='bx bx-user' ></i>
+
+                {{ form.username.errors }}
+
+                {{ form.username }}
+            </div>
+          <div class="row">
+
+            <i class='bx bx-lock-alt'></i>
+              {{ form.password.errors }}
+                {{ form.password }}
+            </div>
+            <div class="row button">
+            <input type="submit" value="Login" onclick="check(this.form)">
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
